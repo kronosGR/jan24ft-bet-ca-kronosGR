@@ -1,0 +1,6 @@
+@jan24ft_bet_ca_kronosGR_HostAddress = http://localhost:5133
+
+GET {{jan24ft_bet_ca_kronosGR_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
