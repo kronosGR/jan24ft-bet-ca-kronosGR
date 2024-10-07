@@ -13,5 +13,6 @@ namespace jan24ft_bet_ca_kronosGR
         { }
 
         public DbSet<Developer> Developers { get; set; }
+
     }
 }

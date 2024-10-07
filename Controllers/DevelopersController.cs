@@ -13,6 +13,7 @@ namespace jan24ft_bet_ca_kronosGR.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Produces("application/json")]
     public class DevelopersController : ControllerBase
     {
 
@@ -22,6 +23,11 @@ namespace jan24ft_bet_ca_kronosGR.Controllers
         {
             _dataContext = dataContext;
         }
+
+        /// <summary>
+        /// Retrieves all developers
+        /// </summary>
+        /// <returns></returns>
 
         [HttpGet]
         [Authorize]
@@ -35,6 +41,11 @@ namespace jan24ft_bet_ca_kronosGR.Controllers
             return await _dataContext.Developers.ToListAsync();
         }
 
+        /// <summary>
+        /// Retrieves a developer by Id
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
         [HttpGet("{Id}")]
         [Authorize]
         public async Task<ActionResult<Developer>> GetDeveloper(int Id)
@@ -48,7 +59,25 @@ namespace jan24ft_bet_ca_kronosGR.Controllers
             return developer;
         }
 
+        /// <summary>
+        /// Creates a new Developer
+        /// </summary>
+        /// <remarks>
+        /// Sample Request:
+        /// 
+        ///     {
+        ///        "id": 1,
+        ///        "firstname": "Kronos",
+        ///        "lastname": "GR",
+        ///        "roleId": 1,
+        ///        "teamId": 1
+        ///     }
+        /// </remarks>
+        /// <response code="201">Returns the newly created developer</response>
+        /// <response code="400">If the developer is null</response>
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [Authorize]
         public async Task<ActionResult<Developer>> AddDeveloper(Developer developer)
         {
