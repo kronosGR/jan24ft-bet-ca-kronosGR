@@ -27,8 +27,7 @@ namespace jan24ft_bet_ca_kronosGR.Controllers
         /// <summary>
         /// Retrieves all developers
         /// </summary>
-        /// <returns></returns>
-
+        //GET api/Developers/{id}
         [HttpGet]
         [Authorize]
         public async Task<ActionResult<IEnumerable<Developer>>> GetDevelopers()
@@ -44,8 +43,7 @@ namespace jan24ft_bet_ca_kronosGR.Controllers
         /// <summary>
         /// Retrieves a developer by Id
         /// </summary>
-        /// <param name="Id"></param>
-        /// <returns></returns>
+        //GET api/Developers/{id}
         [HttpGet("{Id}")]
         [Authorize]
         public async Task<ActionResult<Developer>> GetDeveloper(int Id)
@@ -75,6 +73,7 @@ namespace jan24ft_bet_ca_kronosGR.Controllers
         /// </remarks>
         /// <response code="201">Returns the newly created developer</response>
         /// <response code="400">If the developer is null</response>
+        //POST api/Developers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -86,6 +85,10 @@ namespace jan24ft_bet_ca_kronosGR.Controllers
             return CreatedAtAction(nameof(GetDeveloper), new { id = developer.Id }, developer);
         }
 
+        ///
+        /// Updates a specific Developer.
+        ///
+        //PUT api/Developers/{id}
         [HttpPost("{Id:int}")]
         [Authorize]
         public async Task<ActionResult<Developer>> UpdateDeveloper(int Id, Developer developer)
@@ -110,6 +113,10 @@ namespace jan24ft_bet_ca_kronosGR.Controllers
             return NoContent();
         }
 
+        ///
+        /// Deletes a specific Developer.
+        ///
+        //DELETE api/Developers/{id}
         [HttpDelete("{Id}")]
         [Authorize]
         public async Task<ActionResult<Developer>> DeleteDeveloper(int Id)
