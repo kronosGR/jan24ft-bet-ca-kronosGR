@@ -18,13 +18,14 @@ namespace jan24ft_bet_ca_kronosGR.Controllers
         /// <summary>
         /// User registration
         /// </summary>
+        /// <remarks>
         /// Sample request:
         ///
         ///     {
-        ///        "username": "kronos,
+        ///        "username": "kronos",
         ///        "password": "123456"
         ///     }
-        /// 
+        /// </remarks> 
         //POST /api/Auth/register
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -42,13 +43,14 @@ namespace jan24ft_bet_ca_kronosGR.Controllers
         /// <summary>
         /// User login
         /// </summary>
+        /// <remarks>
         /// Sample request:
         ///
         ///     {
-        ///        "username": "kronos,
+        ///        "username": "kronos",
         ///        "password": "123456"
         ///     }
-        /// 
+        /// </remarks> 
         //GET /api/Auth/login
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]

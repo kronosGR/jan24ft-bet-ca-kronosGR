@@ -32,7 +32,6 @@ namespace jan24ft_bet_ca_kronosGR.Controllers
         /// </summary>
         //GET api/Roles
         [HttpGet]
-        [Authorize]
         public async Task<ActionResult<IEnumerable<Role>>> GetRoles()
         {
             if (_dataContext.Roles == null) return NotFound();
@@ -45,7 +44,6 @@ namespace jan24ft_bet_ca_kronosGR.Controllers
         /// </summary>
         //GET api/Roles/{id}
         [HttpGet("{Id}")]
-        [Authorize]
         public async Task<ActionResult<Role>> GetRole(int Id)
         {
             if (_dataContext.Roles == null) return NotFound();
@@ -62,7 +60,6 @@ namespace jan24ft_bet_ca_kronosGR.Controllers
         /// Sample Request:
         /// 
         ///     {
-        ///        "id": 1,
         ///        "name": "Fullstack developer"
         ///     }
         /// </remarks>
@@ -75,6 +72,7 @@ namespace jan24ft_bet_ca_kronosGR.Controllers
         [Authorize]
         public async Task<ActionResult<Role>> AddRole(Role role)
         {
+            _dataContext.Roles.Add(role);
             await _dataContext.SaveChangesAsync();
             return CreatedAtAction(nameof(GetRole), new { id = role.Id }, role);
         }
@@ -82,9 +80,17 @@ namespace jan24ft_bet_ca_kronosGR.Controllers
         ///  <summary>
         /// Updates a specific Role.
         /// </summary>
+        /// <remarks>
+        /// Sample Request:
+        /// 
+        ///     {
+        ///        "id": 1,
+        ///        "name": "Fullstack developer"
+        ///     }
+        /// </remarks>
         //PUT api/Roles/{id}
         [HttpPut("{Id:int}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [Authorize]
         public async Task<ActionResult<Role>> UpdateRole(int Id, Role role)
@@ -111,7 +117,7 @@ namespace jan24ft_bet_ca_kronosGR.Controllers
         /// </summary>
         //DELETE api/Roles/{id}
         [HttpDelete("{Id}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [Authorize]
         public async Task<ActionResult<Role>> DeleteRole(int Id)
