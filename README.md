@@ -1,9 +1,12 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/9HM9TmKV)
 
 ![](http://images.restapi.co.za/pvt/Noroff-64.png)
+
 # Noroff
+
 ## Back-end Development Year 2
-### BET - Course Assignment 
+
+### BET - Course Assignment
 
 Classroom repository for Noroff back-end development 2 - BET Course Assignment.
 
@@ -22,12 +25,55 @@ If you are unsure of any instructions for the course assignment, contact out to 
 
 ---
 
-#Application setup instructions
+## Application setup instructions
 
-#Instructions to run the application
+```
+// how I created the project
+dotnet new webapi -controllers -f net8.0
 
-#Instructions to create needed Migrations
+// added the .gitignore file
+dotnet new gitignore
 
-#Connection String structure for MySQL Database connection
+// installed EF cli tool
+dotnet tool install --global dotnet-ef
 
-#Additional external libraries/packages used
+// installed the packages
+dotnet add package MySQL.EntityFrameworkCore
+dotnet add package Microsoft.EntityFrameworkCore.Design
+dotnet add package Microsoft.AspNetCore.Authentication.JwtBearer
+dotnet add package System.IdentityModel.Tokens.Jwt
+```
+
+## Instructions to run the application
+
+```
+dotnet run
+```
+
+and then open your browser to http://localhost:PORT/swagger/index.html
+replace PORT with the port is showing on terminal after executing dotnet
+
+## Instructions to create needed Migrations
+
+```
+// create migration
+dotnet ef migrations add -c DataContext Final
+
+// update the Database and create the tables,fields and relationships
+dotnet ef database update
+```
+
+## Connection String structure for MySQL Database connection
+
+```
+"ConnectionStrings": {
+    "DefaultConnection": "server=srvName;database=DBname;user=devhouse;password=userPassword"
+  }
+```
+
+## Additional external libraries/packages used
+
+- MySQL.EntityFrameworkCore
+- Microsoft.EntityFrameworkCore.Design
+- Microsoft.AspNetCore.Authentication.JwtBearer
+- System.IdentityModel.Tokens.Jwt
