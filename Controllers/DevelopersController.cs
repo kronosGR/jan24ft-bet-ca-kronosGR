@@ -1,13 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 using jan24ft_bet_ca_kronosGR.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 
 namespace jan24ft_bet_ca_kronosGR.Controllers
 {
@@ -27,7 +21,7 @@ namespace jan24ft_bet_ca_kronosGR.Controllers
         /// <summary>
         /// Retrieves all developers
         /// </summary>
-        //GET api/Developers/{id}
+        //GET api/Developers
         [HttpGet]
         [Authorize]
         public async Task<ActionResult<IEnumerable<Developer>>> GetDevelopers()
@@ -90,6 +84,8 @@ namespace jan24ft_bet_ca_kronosGR.Controllers
         /// </summary>
         //PUT api/Developers/{id}
         [HttpPut("{Id:int}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [Authorize]
         public async Task<ActionResult<Developer>> UpdateDeveloper(int Id, Developer developer)
         {
@@ -118,6 +114,8 @@ namespace jan24ft_bet_ca_kronosGR.Controllers
         /// </summary>
         //DELETE api/Developers/{id}
         [HttpDelete("{Id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [Authorize]
         public async Task<ActionResult<Developer>> DeleteDeveloper(int Id)
         {
