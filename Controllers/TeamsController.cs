@@ -18,7 +18,7 @@ namespace jan24ft_bet_ca_kronosGR.Controllers
 
         public TeamsController(DataContext dataContext)
         {
-            _datacontext = dataContext;
+            _dataContext = dataContext;
         }
 
 
