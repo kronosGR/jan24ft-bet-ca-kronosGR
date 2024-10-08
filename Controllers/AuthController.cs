@@ -1,14 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Text;
+using jan24ft_bet_ca_kronosGR.Services;
+using jan24ft_bet_ca_kronosGR.DTO;
 
 namespace jan24ft_bet_ca_kronosGR.Controllers
 {
@@ -16,35 +8,61 @@ namespace jan24ft_bet_ca_kronosGR.Controllers
     [Route("api/[controller]")]
     public class AuthController : ControllerBase
     {
-        private readonly JwtSettings _jwtSettings;
+        private readonly AuthService _authService;
 
-        public AuthController(JwtSettings jwtSettings)
+        public AuthController(AuthService authService)
         {
-            _jwtSettings = jwtSettings;
-
+            _authService = authService;
         }
 
-        [HttpPost("token")]
-        public IActionResult GenerateToken()
+        /// <summary>
+        /// User registration
+        /// </summary>
+        /// Sample request:
+        ///
+        ///     {
+        ///        "username": "kronos,
+        ///        "password": "123456"
+        ///     }
+        /// 
+        //POST /api/Auth/register
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [HttpPost("register")]
+        public async Task<IActionResult> Register([FromBody] UserDTO request)
         {
-            var claims = new[]
+            if (await _authService.RegisterUserAsync(request.Username, request.Password))
             {
-                new Claim(JwtRegisteredClaimNames.Sub, "user"),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
-            };
+                return Ok("Registration Success");
+            }
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.SecretKey));
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+            return BadRequest("Something went wrong");
+        }
 
-            var token = new JwtSecurityToken(
-                issuer: _jwtSettings.Issuer,
-                audience: _jwtSettings.Audience,
-                claims: claims,
-                expires: DateTime.Now.AddMinutes(_jwtSettings.ExpiryMinutes),
-                signingCredentials: creds
-            );
+        /// <summary>
+        /// User login
+        /// </summary>
+        /// Sample request:
+        ///
+        ///     {
+        ///        "username": "kronos,
+        ///        "password": "123456"
+        ///     }
+        /// 
+        //GET /api/Auth/login
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] UserDTO request)
+        {
+            if (await _authService.ValidateUserAsync(request.Username, request.Password))
+            {
+                var user = await _authService.GetUserByUsername(request.Username);
+                var token = _authService.GenerateToken(user);
+                return Ok(new { Token = token });
+            }
 
-            return Ok(new JwtSecurityTokenHandler().WriteToken(token));
+            return Unauthorized("Invalid username or password");
         }
     }
 }

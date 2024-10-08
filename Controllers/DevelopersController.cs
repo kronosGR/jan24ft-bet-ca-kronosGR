@@ -85,11 +85,11 @@ namespace jan24ft_bet_ca_kronosGR.Controllers
             return CreatedAtAction(nameof(GetDeveloper), new { id = developer.Id }, developer);
         }
 
-        ///
+        ///  <summary>
         /// Updates a specific Developer.
-        ///
+        /// </summary>
         //PUT api/Developers/{id}
-        [HttpPost("{Id:int}")]
+        [HttpPut("{Id:int}")]
         [Authorize]
         public async Task<ActionResult<Developer>> UpdateDeveloper(int Id, Developer developer)
         {
@@ -113,9 +113,9 @@ namespace jan24ft_bet_ca_kronosGR.Controllers
             return NoContent();
         }
 
-        ///
+        /// <summary>
         /// Deletes a specific Developer.
-        ///
+        /// </summary>
         //DELETE api/Developers/{id}
         [HttpDelete("{Id}")]
         [Authorize]

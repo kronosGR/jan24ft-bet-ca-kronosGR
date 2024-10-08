@@ -16,7 +16,7 @@ namespace jan24ft_bet_ca_kronosGR.Models
         public int Id { get; set; }
         public string Name { get; set; }
 
-        public ICollection<Project> Projects { get; set; }
-        public ICollection<Developer> Developers { get; set; }
+        public ICollection<Project>? Projects { get; set; }
+        public ICollection<Developer>? Developers { get; set; }
     }
 }

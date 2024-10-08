@@ -19,6 +19,7 @@ namespace jan24ft_bet_ca_kronosGR
         public DbSet<ProjectType> ProjectTypes { get; set; }
         public DbSet<Team> Teams { get; set; }
         public DbSet<Project> Projects { get; set; }
+        public DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
