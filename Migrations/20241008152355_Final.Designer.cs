@@ -10,8 +10,8 @@ using jan24ft_bet_ca_kronosGR;
 namespace jan24ft_bet_ca_kronosGR.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20241008082709_User")]
-    partial class User
+    [Migration("20241008152355_Final")]
+    partial class Final
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

@@ -58,7 +58,6 @@ namespace jan24ft_bet_ca_kronosGR.Controllers
         /// Sample Request:
         /// 
         ///     {
-        ///        "id": 1,
         ///        "firstname": "Kronos",
         ///        "lastname": "GR",
         ///        "roleId": 1,
@@ -82,6 +81,17 @@ namespace jan24ft_bet_ca_kronosGR.Controllers
         ///  <summary>
         /// Updates a specific Developer.
         /// </summary>
+        /// /// <remarks>
+        /// Sample Request:
+        /// 
+        ///     {
+        ///        "id":"1",
+        ///        "firstname": "Kronos",
+        ///        "lastname": "GR",
+        ///        "roleId": 1,
+        ///        "teamId": 1
+        ///     }
+        /// </remarks>
         //PUT api/Developers/{id}
         [HttpPut("{Id:int}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
